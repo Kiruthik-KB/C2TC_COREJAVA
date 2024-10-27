@@ -5,5 +5,5 @@
  * @author kirut
  *
  */
-module C2TC_COREJAVA {
+module C2TC_KIRUTHIK {
 }
