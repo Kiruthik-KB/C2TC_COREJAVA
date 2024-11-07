@@ -1,4 +1,4 @@
-package com.tnsif.daythree.scannerdemo; 
+package com.tns.ifet.daythree.scannerdemo; 
 public class Person { 
 //Data members 
 private String name; 

@@ -1,6 +1,6 @@
 //Program to demonstrate encapsulation 
 //Program to demonstrate encapsulation 
-package com.tnsif.daythree.scannerdemo; 
+package com.tns.ifet.daythree.scannerdemo; 
  
 import java.util.Scanner; 
  

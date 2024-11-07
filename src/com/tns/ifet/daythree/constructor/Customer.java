@@ -1,4 +1,4 @@
-package com.tnsif.daythree.constructor;
+package com.tns.ifet.daythree.constructor;
 
 public class Customer { 
 private String customerName; 

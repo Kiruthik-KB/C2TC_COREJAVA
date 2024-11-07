@@ -1,4 +1,4 @@
-package com.tnsif.daythree.encapsulation;
+package com.tns.ifet.daythree.encapsulation;
 
 public class OopsConceptDemo {
 
