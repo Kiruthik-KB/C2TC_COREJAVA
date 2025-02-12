@@ -1,35 +1,54 @@
-//Program to demonstrate accessing classes and methods
-package com.tnsif.dayfour.firstpackage;
+//Program to implement student module
+package com.tnsif.daytwelve;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Executor {
+
 	public static void main(String[] args) {
-		
-	//accessing same package class
-		Base b1=new Base();
-		b1.methodDefault();
-		b1.methodProtected();
-		b1.methodPublic();
-		
-		b1.varDefault=11;
-		b1.methodDefault();
-		
-		//private member can't accessible
-		/*b1.varPrivate=21; 
-		b1.methodPrivate();*/
-		
-		b1.varProtected=31;
-		b1.methodProtected();
-		
-		b1.varPublic=41;
-		b1.methodPublic();
-		
-		//instance of operator
-		System.out.println(b1 instanceof Base); //returns True
-		
-		/*
-		 * Person p=new Person(); System.out.println(p instanceof Base); //CTE
-		 * Incompatible types
-		 */	}
+		try {
+			@SuppressWarnings("resource")
+			Scanner sc = new Scanner(System.in);
+			//Accept student details
+			Student sOne = new Student();
+			System.out.println("Enter the roll no: ");
+			int rollNo = sc.nextInt();
+			sOne.setRollNo(rollNo);
+			System.out.println("Enter your name: ");
+			String name = sc.nextLine();
+			sc.nextLine();
+			sOne.setName(name);
+			System.out.println("Enter the no.of subjects ");
+			int sub = sc.nextInt();
+			sOne.setNoOfSubjects(sub);
+			System.out.println("enter the marks for " + sub);
+			int[] intArr = new int[sub];
+			for (int i = 0; i < sub; i++) {
+
+				intArr[i] = sc.nextInt();
+			}
+			//validate marks
+			if (Service.validateMarks(intArr)) {
+
+				sOne.setMarks(intArr);
+				sOne.setPer(Service.calculatePercentage(intArr));
+
+			}
+			//display student details
+			System.out.println("Student details: " + sOne);
+
+		} catch (InvalidMarksException e) {
+			// e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+
+		catch (NullPointerException | ArithmeticException |InputMismatchException e) {
+
+			// e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+
+	}
 
 }
