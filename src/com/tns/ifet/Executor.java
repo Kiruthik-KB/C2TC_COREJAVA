@@ -1,54 +1,31 @@
-//Program to implement student module
-package com.tnsif.daytwelve;
+//Program to demonstrate concurrency
+package com.tnsif.dayfourteen.synchronization;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Executor {
 
 	public static void main(String[] args) {
+		Account a1 = new Account(101, "Amit", 50000);
+		System.out.println(a1);
+
+		ExecutorService executor = Executors.newFixedThreadPool(10);
+
+		for (int i = 0; i < 10; i++) {
+			Runnable task = new AccountThread(a1, 1000 * (i + 1));
+			executor.submit(task);
+		}
+
+		executor.shutdown();
 		try {
-			@SuppressWarnings("resource")
-			Scanner sc = new Scanner(System.in);
-			//Accept student details
-			Student sOne = new Student();
-			System.out.println("Enter the roll no: ");
-			int rollNo = sc.nextInt();
-			sOne.setRollNo(rollNo);
-			System.out.println("Enter your name: ");
-			String name = sc.nextLine();
-			sc.nextLine();
-			sOne.setName(name);
-			System.out.println("Enter the no.of subjects ");
-			int sub = sc.nextInt();
-			sOne.setNoOfSubjects(sub);
-			System.out.println("enter the marks for " + sub);
-			int[] intArr = new int[sub];
-			for (int i = 0; i < sub; i++) {
-
-				intArr[i] = sc.nextInt();
-			}
-			//validate marks
-			if (Service.validateMarks(intArr)) {
-
-				sOne.setMarks(intArr);
-				sOne.setPer(Service.calculatePercentage(intArr));
-
-			}
-			//display student details
-			System.out.println("Student details: " + sOne);
-
-		} catch (InvalidMarksException e) {
-			// e.printStackTrace();
+			executor.awaitTermination(5, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
 			System.err.println(e.getMessage());
 		}
 
-		catch (NullPointerException | ArithmeticException |InputMismatchException e) {
-
-			// e.printStackTrace();
-			System.err.println(e.getMessage());
-		}
-
+		System.out.println("------------------------------------");
+		System.out.println(a1);
 	}
-
 }
